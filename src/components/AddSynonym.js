@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "../services/api";
 
 const AddSynonym = () => {
@@ -7,6 +7,15 @@ const AddSynonym = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const wordInputRef = useRef(null);
+
+  const makeFieldsEmpty = () => {
+    setWord("");
+    setSynonym("");
+    if (wordInputRef.current) {
+      wordInputRef.current.focus();
+    }
+  };
 
   const handleAddSynonym = async () => {
     if (!word || !synonym) return setError("Please enter both fields");
@@ -16,10 +25,17 @@ const AddSynonym = () => {
     try {
       await axios.post("/add-synonym", { word, synonym });
       setMessage("Synonym added successfully!");
+      makeFieldsEmpty();
     } catch (err) {
       setError("Failed to add synonyms");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleAddSynonym();
     }
   };
 
@@ -32,6 +48,8 @@ const AddSynonym = () => {
         onChange={(e) => setWord(e.target.value)}
         className="border p-2 rounded w-full mb-2"
         placeholder="Enter a word"
+        onKeyUp={handleKeyPress}
+        ref={wordInputRef}
       />
       <input
         type="text"
@@ -39,6 +57,7 @@ const AddSynonym = () => {
         onChange={(e) => setSynonym(e.target.value)}
         className="border p-2 rounded w-full"
         placeholder="Enter synonym"
+        onKeyUp={handleKeyPress}
       />
       <button
         onClick={handleAddSynonym}
