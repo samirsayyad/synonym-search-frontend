@@ -68,7 +68,7 @@ const SynonymSearch = () => {
 
   return (
     <div className="my-4 p-6 bg-white shadow-md rounded-lg max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-center">Find Synonyms</h2>
+      <h2 className="text-2xl font-bold mb-4 text-left">Find Synonyms</h2>
       <input
         type="text"
         value={word}
