@@ -2,6 +2,10 @@
 
 This is the frontend of the Synonym Search Tool, built using **React.js**. The frontend provides a user-friendly interface to search for synonyms and add new synonyms. It is designed to be responsive and easily extensible.
 
+[Live demo](https://synonym-search-frontend-14e02c2a5a9d.herokuapp.com)
+
+[Api Repo](https://github.com/samirsayyad/synonym-search-api)
+
 ## **Table of Contents**
 
 - [Features](#features)
